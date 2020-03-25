@@ -1,0 +1,142 @@
+@import plugins/setup
+
+html
+  font: 1em/1.84em 'Sen', sans-serif
+  background: white
+
+.filter
+  width: 100%
+  label
+    margin: 0 2em 0 0em
+    font-size: .95em
+  .search,.mod,.compare,.comparesnd
+    border: 1px solid gray
+    font-size: .8em
+    padding: 1.5em
+    margin: 1em 2em 0 0em
+    width: 100%
+    font-size: 1.4em
+
+
+.headline>.date
+  font-size: 1.2em
+.headline
+  hgroup
+    margin: 1.7em
+    text-transform: uppercase
+    text-align: center
+    font-size: 2em
+    h2
+      font-size: .3em
+  div
+    text-align: center
+    font-size: .7em
+
+
+.global>div
+  font-size: 1.8em
+  padding: .3em
+  align-items: center
+  text-align: left
+  span
+    text-align: right
+    float: right
+    margin-right: 2em
+    font-size: 1.3em
+
+.global>.confirmed
+  color: rgb(223, 39, 39)
+.global>.recovered
+  color: rgb(88, 176, 97)
+.global>.deaths
+  color: rgb(56, 56, 57)
+.global>.mort
+  color: rgb(117, 114, 116)
+.global>.active
+  color: rgb(41, 123, 246)
+
+
+.regionlists,.global,.filter-options
+  display: block
+  font-size: .6em
+  margin: 2em auto
+  width: 100%
+  ul
+    display: block
+    float: left
+    list-style: none
+    width: 100%
+    text-transform: uppercase
+    overflow: hidden
+    margin-bottom: 2em
+    margin-right: 1em
+    //box-shadow: 0px 0px 3px rgb(199, 199, 199)
+    background: rgb(246, 246, 246)
+    li:hover
+      background: rgb(235, 233, 233)
+    li
+      padding: .8em
+      overflow: hidden
+      text-align: left
+      padding-left: 2em
+      span
+        font-weight: bold
+        float: right
+        padding: 0 .8em 0 0
+    li:nth-child(1)
+      background: rgb(78, 89, 103)
+      font-weight: bold
+      font-size: 1em
+      text-align: center
+      margin-bottom: 0em
+      color: white
+    li:nth-child(2)
+      background: rgb(196, 213, 215)
+    li:nth-child(2)
+      display: block
+    li:nth-child(3)
+      display: none
+    li[class*='mortality']
+      color: rgb(40, 35, 97)
+    li[class*='confirmed']
+      color: rgb(223, 39, 39)
+    li:nth-child(6)
+      display: none
+
+
+
+.regionlists,.global,.filter-options
+  +desktop
+  width: 100%
+  padding: 1em
+
+.filter-options
+  +desktop
+  padding: 4em
+
+.global>div
+  +desktop
+  padding-left: 2em
+
+
+.regionlists>ul
+  +desktop
+    +grid-column(3)
+  margin: 0
+  margin-bottom: 2em
+
+
+.filter-options,.filter
+  +desktop
+  display: block
+
+
+//.search,.mod,.compare,.comparesnd
+  +desktop
+  border: 1px solid gray
+  font-size: .8em
+  padding: 1em
+  margin: 1em 2em 0 0em
+  display: inline
+  float: left
+  clear: none
