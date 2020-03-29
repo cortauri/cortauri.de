@@ -17,16 +17,18 @@ $(function() {
 
     });
 
-    console.log(poptotal);
+    $("<div class='pop'>Population Total <span>"+ poptotal +"</span></div>").appendTo( ".global" );
+
+
 
   });
 
-
-
   $.getJSON( "https://pomber.github.io/covid19/timeseries.json", function(data) {
     var global_count_conf = 0;
+    var global_count_conf_yes = 0;
     //var global_count_recov = 0;
     var global_count_death = 0;
+    var global_count_death_yes = 0;
     //var global_count_active = 0;
     var global_date;
 
@@ -39,6 +41,13 @@ $(function() {
       global_count_death += last_element.deaths;
       //global_count_active = global_count_conf-global_count_recov-global_count_death;
       global_date = last_element.date;
+
+      var last_element_yes = value[value.length - modus-1];
+      global_count_conf_yes += last_element_yes.confirmed;
+      //global_count_recov += last_element.recovered;
+      global_count_death_yes += last_element_yes.deaths;
+      //global_count_active = global_count_conf-global_count_recov-global_count_death;
+      //global_date_yes = last_element_yes.date;
 
       var indexclear = index.replace(/ /g, "-").replace("*","-").replace("(","-").replace(",","-").replace(")","-").replace("'","-");
 
@@ -74,12 +83,18 @@ $(function() {
     });
 
 
+  var poptotalsum = $(".pop>span").html();
+  console.log(poptotalsum);
+  var global_pop_mort = ((global_count_death/poptotalsum)*100).toFixed(5);
 
+  var diff_conf = global_count_conf-global_count_conf_yes;
+  var diff_death = global_count_death-global_count_death_yes;
 
-  $("<div class='date'><span>"+ global_date +"</span></div>").appendTo( ".headline" );
-  $("<div class='confirmed'>Confirmed <span>"+ global_count_conf +"</span></div>").appendTo( ".global" );
+  $("<div class='date'>Global Stats <span>"+ global_date +"</span></div>").appendTo( ".headline" );
+  $("<div class='poppro'>Population Affected<span>"+ global_pop_mort +"%</span></div>").appendTo( ".global" );
+  $("<div class='confirmed'>Confirmed | -1Day  | d<span>"+ global_count_conf +" | "+ global_count_conf_yes +" | +"+ diff_conf +"</span></div>").appendTo( ".global" );
   //$("<div class='recovered'>Recovered <span>"+ global_count_recov +"</span></div>").appendTo( ".global" );
-  $("<div class='deaths'>Deaths <span>"+ global_count_death +"</span></div>").appendTo( ".global" );
+  $("<div class='deaths'>Deaths | -1Day | d<span>"+ global_count_death +" | "+ global_count_death_yes +" | +"+ diff_death +"</span></div>").appendTo( ".global" );
   //$("<div class='active'>Active <span>"+ global_count_active +"</span></div>").appendTo( ".global" );
 
   var global_count_mort = ((global_count_death/global_count_conf)*100).toFixed(2);

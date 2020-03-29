@@ -26,6 +26,8 @@ html
     text-transform: uppercase
     text-align: center
     font-size: 2em
+    h1
+      margin-bottom: 1em
     h2
       font-size: .3em
   div
@@ -34,15 +36,16 @@ html
 
 
 .global>div
-  font-size: 1.8em
+  font-size: 1em
   padding: .3em
   align-items: center
   text-align: left
+  padding-left: 2em
   span
     text-align: right
     float: right
     margin-right: 2em
-    font-size: 1.3em
+    font-size: 1.2em
 
 .global>.confirmed
   color: rgb(223, 39, 39)
@@ -110,14 +113,13 @@ html
   width: 100%
   padding: 1em
 
+.global
+  +desktop
+  padding: 2em
+
 .filter-options
   +desktop
   padding: 4em
-
-.global>div
-  +desktop
-  padding-left: 2em
-
 
 .regionlists>ul
   +desktop
