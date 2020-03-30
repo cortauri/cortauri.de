@@ -1,35 +1,59 @@
 @import plugins/setup
 
 html
-  font: 1em/1.84em 'Sen', sans-serif
-  background: white
+  font: 1em/1.84em 'Lato', sans-serif
+  background: rgb(252,252,252)
+  min-height: 100%
+  height: 100%
+
+.credits
+  clear: both
+  display: block
+  overflow: hidden
+  width: 100%
+  height: 500px
+  background: rgb(218, 218, 218)
+  article
+    +grid-column(12)
+    text-align: center
+    margin: 1em
+    h1,p
+      font-size: .5em
+    p
+      font-weight: bold
 
 .filter
   width: 100%
-  label
-    margin: 0 2em 0 0em
-    font-size: .95em
-  .search,.mod,.compare,.comparesnd
+  .search,.mod,.compare,.comparesnd,.comparetrd
+    +grid-column(3)
     border: 1px solid gray
     font-size: .8em
-    padding: 1.5em
-    margin: 1em 2em 0 0em
-    width: 100%
-    font-size: 1.4em
+    font-size: 1.5em
+    border-radius: 3px
+    display: inline-block
+    float: left
+    padding: 1em
+    margin-bottom: 1em
 
 
 .headline>.date
   font-size: 1.2em
 .headline
   hgroup
-    margin: 1.7em
+    display: block
+    margin: 1em
     text-transform: uppercase
     text-align: center
-    font-size: 2em
+    font-size: 2.5em
+    //overflow: hidden
     h1
       margin-bottom: 1em
+      text-decoration: underline
+      line-height: 1em
+      font-weight: bold
     h2
-      font-size: .3em
+      font-size: .2em
+      overflow: hidden
   div
     text-align: center
     font-size: .7em
@@ -40,32 +64,43 @@ html
   padding: .3em
   align-items: center
   text-align: left
-  padding-left: 2em
+  padding-left: 1em
+  margin: 0em
+  border-bottom: 1px solid rgb(219, 220, 221)
+  //background: rgb(245,245,245)
   span
     text-align: right
     float: right
-    margin-right: 2em
-    font-size: 1.2em
+    margin-right: .7em
+    font-size: 1.5em
+    width: auto
 
 .global>.confirmed
   color: rgb(223, 39, 39)
+  background: beige
 .global>.recovered
   color: rgb(88, 176, 97)
 .global>.deaths
-  color: rgb(56, 56, 57)
+  color: white
+  background: rgb(68, 68, 68)
 .global>.mort
   color: rgb(117, 114, 116)
 .global>.active
   color: rgb(41, 123, 246)
-
+.headline>.date
+  text-transform: uppercase
+  font-family: 'Sen'
+  font-weight: bold
 
 .regionlists,.global,.filter-options
   display: block
   font-size: .6em
   margin: 2em auto
   width: 100%
+  clear: both
   ul
     display: block
+    //border-radius: 8px
     float: left
     list-style: none
     width: 100%
@@ -73,39 +108,49 @@ html
     overflow: hidden
     margin-bottom: 2em
     margin-right: 1em
-    //box-shadow: 0px 0px 3px rgb(199, 199, 199)
+    //box-shadow: 0px 0px 8px rgb(199, 199, 199)
     background: rgb(246, 246, 246)
-    li:hover
-      background: rgb(235, 233, 233)
     li
       padding: .8em
       overflow: hidden
       text-align: left
+      font-weight: bold
       padding-left: 2em
       span
         font-weight: bold
         float: right
         padding: 0 .8em 0 0
-    li:nth-child(1)
-      background: rgb(78, 89, 103)
-      font-weight: bold
+        font-size: 1.35em
+    li[class*='label']
+      background: rgb(49, 72, 92)
+      //font-weight: bold
       font-size: 1em
       text-align: center
       margin-bottom: 0em
       color: white
-    li:nth-child(2)
-      background: rgb(196, 213, 215)
-    li:nth-child(2)
-      display: block
-    li:nth-child(3)
+
+      //background: linear-gradient(0deg, rgba(157,157,157,1) 5%, rgba(255,255,255,0.569625350140056) 95%)
+      //border-bottom: 3px solid white
+    li[class*='mortality']
+      color: rgb(66, 4, 84)
+    li[class*='active']
+      color: rgb(41, 123, 246)
+    li[class*='recovered']
+      color: rgb(255, 255, 255)
+      background: rgb(142, 159, 0)
+    li[class*='date']
       display: none
     li[class*='mortality']
       color: rgb(40, 35, 97)
     li[class*='confirmed']
       color: rgb(223, 39, 39)
-    li:nth-child(6)
-      display: none
-
+      background: beige
+    li[class*='death']
+      background: rgb(68, 68, 68)
+      color: white
+    //li:hover
+      background: rgb(235, 233, 233)
+      color: black
 
 
 .regionlists,.global,.filter-options
@@ -116,13 +161,17 @@ html
 
 +desktop
   .global
-    padding: 1em
+    padding: 0em
     div
-      font-size: 2em
+      font-size: 1.8em
+      margin: 0 1.5em 0 1.5em
+      span
+        font-size: 1em
+        font-weight: 400
 
 .filter-options
   +desktop
-  padding: 4em
+  padding: 1em
 
 .regionlists>ul
   +desktop
