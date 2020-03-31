@@ -79,7 +79,7 @@ $(function() {
       $("<li class='active'>active<span>"+ activepro +"</span></li>").appendTo( "."+ indexclear +"-list" );
 
       $.each( last_element, function (key, value){
-
+          console.log(value);
         $( "<li class='"+ indexclear +"-"+ key +"'>"+ key +" <span>"+ eUS(value) +"</span></li>" ).appendTo( "."+ indexclear +"-list" );
 
       });
@@ -103,7 +103,7 @@ $(function() {
   var diff_activ = global_count_active-global_count_active_yes;
 
 
-  $("<div class='date'>Global Stats | <span>"+ global_date +"</span></div>").appendTo( ".headline" );
+  $("<div class='date'>Global | <span>"+ global_date +"</span></div>").appendTo( ".headline" );
   $("<div class='poppro'>Population Affected<span>"+ global_pop_mort +"%</span></div>").appendTo( ".global" );
   $("<div class='confirmed'>Confirmed | -1Day  | &delta; <span>"+ eUS(global_count_conf) +" | "+ eUS(global_count_conf_yes) +" | +"+ eUS(diff_conf) +"</span></div>").appendTo( ".global" );
   $("<div class='active'>Active | -1Day | &delta; <span>"+ eUS(global_count_active) +" | "+ eUS(global_count_active_yes) + " | +"+ eUS(diff_activ) +"</span></div>").appendTo( ".global" );
@@ -121,24 +121,28 @@ $(function() {
 
   });
 
-  $(".search,.compare,.comparesnd,.comparetrd").on('input', function(){
+  $(".search").on('input', function(){
     var val = this.value;
-    $(".regionlists>ul").show();
-    $(".regionlists>ul[class!='"+ val +"']").hide();
-    $(".regionlists>ul[class!='save']").removeClass("save");
-    $(".regionlists>ul[class!='save']").hide();
-    $(".regionlists>ul[class*='save']").show();
-    $(".regionlists>ul[class*='"+ val +"']").show().addClass("save");
-
-
+    $(".regionlists>ul").removeClass("save_one");
+    $(".regionlists>ul").hide();
+    $(".regionlists>ul[class*='save_two']").show();
+    $(".regionlists>ul[class|='"+ val +"']").show().addClass("save_one").css("order","0");
     if (val == '') {
-      $(".regionlists>ul[class!='save']").hide();
-      $(".regionlists>ul[class*='save']").show();
-      $(".regionlists>ul[class*='save']").removeClass("save");
-      $(".regionlists>ul").show();
-
-
+      $(".regionlists>ul").show().removeClass("save_one");
     }
+    //console.log(val);
+  });
+
+  $(".compare").on('input', function(){
+    var val = this.value;
+    $(".regionlists>ul").removeClass("save_two");
+    $(".regionlists>ul").hide();
+    $(".regionlists>ul[class*='save_one']").show();
+    $(".regionlists>ul[class|='"+ val +"']").show().addClass("save_two").css("order","2");
+    if (val == '') {
+      $(".regionlists>ul").show().removeClass("save_two").css("order","0");
+    }
+
     //console.log(val);
   });
 

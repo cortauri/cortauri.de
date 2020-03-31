@@ -25,7 +25,7 @@ html
 .filter
   width: 100%
   .search,.mod,.compare,.comparesnd,.comparetrd
-    +grid-column(3)
+    +grid-column(6)
     border: 1px solid gray
     font-size: .8em
     font-size: 1.5em
@@ -77,12 +77,12 @@ html
 
 .global>.confirmed
   color: rgb(223, 39, 39)
-  background: beige
+  //background: beige
 .global>.recovered
   color: rgb(88, 176, 97)
 .global>.deaths
-  color: white
-  background: rgb(68, 68, 68)
+  //color: white
+  //background: rgb(68, 68, 68)
 .global>.mort
   color: rgb(117, 114, 116)
 .global>.active
@@ -90,7 +90,6 @@ html
 .headline>.date
   text-transform: uppercase
   font-family: 'Sen'
-  font-weight: bold
 
 .regionlists,.global,.filter-options
   display: block
@@ -110,6 +109,7 @@ html
     margin-right: 1em
     //box-shadow: 0px 0px 8px rgb(199, 199, 199)
     background: rgb(246, 246, 246)
+    order: 0
     li
       padding: .8em
       overflow: hidden
@@ -122,19 +122,21 @@ html
         padding: 0 .8em 0 0
         font-size: 1.35em
     li[class*='label']
-      background: rgb(49, 72, 92)
-      //font-weight: bold
-      font-size: 1em
+      background: rgb(31, 50, 77)
+      font-weight: bold
+      font-size: 1.2em
       text-align: center
       margin-bottom: 0em
       color: white
+
 
       //background: linear-gradient(0deg, rgba(157,157,157,1) 5%, rgba(255,255,255,0.569625350140056) 95%)
       //border-bottom: 3px solid white
     li[class*='mortality']
       color: rgb(66, 4, 84)
     li[class*='active']
-      color: rgb(41, 123, 246)
+      background: rgb(41, 123, 246)
+      color: white
     li[class*='recovered']
       color: rgb(255, 255, 255)
       background: rgb(142, 159, 0)
@@ -143,14 +145,19 @@ html
     li[class*='mortality']
       color: rgb(40, 35, 97)
     li[class*='confirmed']
-      color: rgb(223, 39, 39)
-      background: beige
+      color: white
+      background: rgb(215, 8, 51)
     li[class*='death']
       background: rgb(68, 68, 68)
       color: white
     //li:hover
       background: rgb(235, 233, 233)
       color: black
+
+.regionlists
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
 
 
 .regionlists,.global,.filter-options
@@ -175,7 +182,7 @@ html
 
 .regionlists>ul
   +desktop
-    +grid-column(3)
+    +grid-column(6)
   margin: 0
   margin-bottom: 2em
 
