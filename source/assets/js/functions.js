@@ -117,7 +117,7 @@ $(function() {
 
   if (global_count_mort >= global_count_mort_yes) { pointer = "+"; }
 
-  $("<div class='mort'>Mortality Rate | -1Day | &delta;<span>"+ global_count_mort+"% | "+ global_count_mort_yes +"% | "+ pointer+""+ diff_mort +"%</span></div>").appendTo( ".global" );
+  $("<div class='mort'>Mortality Rate | -1d | &delta;<span>"+ global_count_mort+"% | "+ global_count_mort_yes +"% | "+ pointer+""+ diff_mort +"%</span></div>").appendTo( ".global" );
 
   });
 
