@@ -154,6 +154,27 @@
 		"oS": 3,
 		"uL": 1
 		},
+	"/source/assets/img/coronav.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 0,
+		"oAP": "/build/assets/img/coronav.svg",
+		"oF": 1,
+		"opt": 1,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/source/assets/img/titleov.png": {
+		"ft": 32768,
+		"iS": 45918,
+		"oA": 0,
+		"oAP": "/build/assets/img/titleov.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
 	"/source/assets/js/functions.js": {
 		"bF": 4,
 		"ft": 64,
@@ -244,7 +265,7 @@
 	"displayValueWasSetByUser": 1,
 	"iconImageName": "meme-leo",
 	"iconImageWasSetByUser": 1,
-	"lastBuiltDate": 606665006.33730102
+	"lastBuiltDate": 607440344.03421903
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,

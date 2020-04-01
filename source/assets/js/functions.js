@@ -1,15 +1,15 @@
 import $ from "jquery"
 
-function eUS(x){
-return x.toLocaleString('en-US');
-}
-
 $(function() {
+
+  function eUS(x){
+  return x.toLocaleString('en-US');
+  }
 
   $.getJSON("https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-population.json" , function(data){
     var poptotal =0;
     $.each( data, function( index, value ){
-      var gtotal = Math.round(value.population/1);
+      var gtotal = Math.round(value.population);
       poptotal += gtotal;
 
     });
@@ -53,7 +53,7 @@ $(function() {
       global_count_active_yes = global_count_conf_yes-global_count_recov_yes-global_count_death_yes;
       //global_date_yes = last_element_yes.date;
 
-      var indexclear = index.replace(/ /g, "-").replace("*","-").replace("(","-").replace(",","-").replace(")","-").replace("'","-");
+      var indexclear = index.replace(/ /g, "-").replace("*","").replace("(","-").replace(",","-").replace(")","-").replace("'","-");
 
       $( "<ul/>", {
         "class": ""+ indexclear +"-list",
@@ -75,12 +75,12 @@ $(function() {
       var active = iconf-ideath-irecov;
       var activepro = eUS(active);
 
-      $("<li class='mortality'>mortality rate<span>"+ totalpro +"%</span></li>").appendTo( "."+ indexclear +"-list" );
-      $("<li class='active'>active<span>"+ activepro +"</span></li>").appendTo( "."+ indexclear +"-list" );
+      $("<li class='mortality'>mortality<br><span>"+ totalpro +"%</span></li>").appendTo( "."+ indexclear +"-list" );
+      $("<li class='active'>active<br><span>"+ activepro +"</span></li>").appendTo( "."+ indexclear +"-list" );
 
       $.each( last_element, function (key, value){
           console.log(value);
-        $( "<li class='"+ indexclear +"-"+ key +"'>"+ key +" <span>"+ eUS(value) +"</span></li>" ).appendTo( "."+ indexclear +"-list" );
+        $( "<li class='"+ indexclear +"-"+ key +"'>"+ key +"<br><span>"+ eUS(value) +"</span></li>" ).appendTo( "."+ indexclear +"-list" );
 
       });
 
@@ -103,12 +103,12 @@ $(function() {
   var diff_activ = global_count_active-global_count_active_yes;
 
 
-  $("<div class='date'>Global | <span>"+ global_date +"</span></div>").appendTo( ".headline" );
+  $("<div class='date'>latest request confirmed <span>"+ global_date +"</span></div>").appendTo( ".headline" );
   $("<div class='poppro'>Population Affected<span>"+ global_pop_mort +"%</span></div>").appendTo( ".global" );
-  $("<div class='confirmed'>Confirmed | -1Day  | &delta; <span>"+ eUS(global_count_conf) +" | "+ eUS(global_count_conf_yes) +" | +"+ eUS(diff_conf) +"</span></div>").appendTo( ".global" );
-  $("<div class='active'>Active | -1Day | &delta; <span>"+ eUS(global_count_active) +" | "+ eUS(global_count_active_yes) + " | +"+ eUS(diff_activ) +"</span></div>").appendTo( ".global" );
-  $("<div class='recovered'>Recovered | -1Day | &delta; <span>"+ eUS(global_count_recov) +" | "+ eUS(global_count_recov_yes) +" | +"+ eUS(diff_recov) +"</span></div>").appendTo( ".global" );
-  $("<div class='deaths'>Deaths | -1Day | &delta; <span>"+ eUS(global_count_death) +" | "+ eUS(global_count_death_yes) +" | +"+ eUS(diff_death) +"</span></div>").appendTo( ".global" );
+  $("<div class='confirmed'>Confirmed | -1d | &delta; <span>"+ eUS(global_count_conf) +" | "+ eUS(global_count_conf_yes) +" | +"+ eUS(diff_conf) +"</span></div>").appendTo( ".global" );
+  $("<div class='active'>Active | -1d | &delta; <span>"+ eUS(global_count_active) +" | "+ eUS(global_count_active_yes) + " | +"+ eUS(diff_activ) +"</span></div>").appendTo( ".global" );
+  $("<div class='recovered'>Recovered | -1d | &delta; <span>"+ eUS(global_count_recov) +" | "+ eUS(global_count_recov_yes) +" | +"+ eUS(diff_recov) +"</span></div>").appendTo( ".global" );
+  $("<div class='deaths'>Deaths | -1d | &delta; <span>"+ eUS(global_count_death) +" | "+ eUS(global_count_death_yes) +" | +"+ eUS(diff_death) +"</span></div>").appendTo( ".global" );
 
   var global_count_mort = ((global_count_death/global_count_conf)*100).toFixed(2);
   var global_count_mort_yes = ((global_count_death_yes/global_count_conf_yes)*100).toFixed(2);

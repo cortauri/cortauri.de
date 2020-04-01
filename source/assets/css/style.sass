@@ -1,10 +1,11 @@
 @import plugins/setup
 
 html
-  font: 1em/1.84em 'Lato', sans-serif
-  background: rgb(252,252,252)
+  font: 1em/1.84em 'Sen', sans-serif
+  background: rgb(33, 33, 33)
   min-height: 100%
   height: 100%
+  color: white
 
 .credits
   clear: both
@@ -12,33 +13,49 @@ html
   overflow: hidden
   width: 100%
   height: 500px
-  background: rgb(218, 218, 218)
+  background: rgb(84, 84, 84)
   article
     +grid-column(12)
     text-align: center
     margin: 1em
-    h1,p
+    h1,p,a
       font-size: .5em
-    p
-      font-weight: bold
+      color: white
 
 .filter
   width: 100%
   .search,.mod,.compare,.comparesnd,.comparetrd
     +grid-column(6)
-    border: 1px solid gray
+    //border: 1px solid gray
     font-size: .8em
     font-size: 1.5em
-    border-radius: 3px
     display: inline-block
     float: left
     padding: 1em
-    margin-bottom: 1em
-
+    margin-bottom: 2em
+    background: rgb(50,50,50)
+    color: white
+    border-radius: 6px
 
 .headline>.date
   font-size: 1.2em
 .headline
+  .logo
+    display: block
+    width: 100%
+    height: 100px
+    position: relative
+    clear: both
+    background: url('../../assets/img/coronav.svg')
+    background-size: auto
+    background-position: center center
+    border: 0px solid white
+    background-repeat: no-repeat
+    margin-bottom: -1.5em
+    margin-top: 2em
+    -webkit-filter: invert(95%)
+    filter: invert(97%)
+    z-index: 1000
   hgroup
     display: block
     margin: 1em
@@ -48,7 +65,7 @@ html
     //overflow: hidden
     h1
       margin-bottom: 1em
-      text-decoration: underline
+      //text-decoration: underline
       line-height: 1em
       font-weight: bold
     h2
@@ -66,7 +83,7 @@ html
   text-align: left
   padding-left: 1em
   margin: 0em
-  border-bottom: 1px solid rgb(219, 220, 221)
+  border-bottom: 1px solid rgb(55, 55, 55)
   //background: rgb(245,245,245)
   span
     text-align: right
@@ -84,12 +101,20 @@ html
   //color: white
   //background: rgb(68, 68, 68)
 .global>.mort
-  color: rgb(117, 114, 116)
+  color: rgb(157, 157, 157)
 .global>.active
   color: rgb(41, 123, 246)
+
+.global>div:last-child
+  border: 0
+
 .headline>.date
+  +grid-column(12)
   text-transform: uppercase
-  font-family: 'Sen'
+  font-size: .8em
+  text-align: center
+  margin-top: -2em
+  margin-bottom: 2em
 
 .regionlists,.global,.filter-options
   display: block
@@ -97,10 +122,11 @@ html
   margin: 2em auto
   width: 100%
   clear: both
+  padding: 2em
   ul
-    display: block
-    //border-radius: 8px
-    float: left
+    //display: block
+    border-radius: 6px
+    //float: left
     list-style: none
     width: 100%
     text-transform: uppercase
@@ -108,14 +134,21 @@ html
     margin-bottom: 2em
     margin-right: 1em
     //box-shadow: 0px 0px 8px rgb(199, 199, 199)
-    background: rgb(246, 246, 246)
+    //background: rgb(246, 246, 246)
     order: 0
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
     li
-      padding: .8em
+      padding: .7em
       overflow: hidden
       text-align: left
-      font-weight: bold
-      padding-left: 2em
+      //font-weight: bold
+      padding-left: 1em
+      width: 100%
+      font-size: .8em
+      text-align: center
+      flex-basis: 25%
       span
         font-weight: bold
         float: right
@@ -124,10 +157,13 @@ html
     li[class*='label']
       background: rgb(31, 50, 77)
       font-weight: bold
-      font-size: 1.2em
+      font-size: 2em
       text-align: center
       margin-bottom: 0em
       color: white
+      flex: 0 0 100%
+      flex-basis: 75%
+      order: 0
 
 
       //background: linear-gradient(0deg, rgba(157,157,157,1) 5%, rgba(255,255,255,0.569625350140056) 95%)
@@ -137,6 +173,7 @@ html
     li[class*='active']
       background: rgb(41, 123, 246)
       color: white
+      order: 3
     li[class*='recovered']
       color: rgb(255, 255, 255)
       background: rgb(142, 159, 0)
@@ -144,6 +181,8 @@ html
       display: none
     li[class*='mortality']
       color: rgb(40, 35, 97)
+      background: rgb(246, 246, 246)
+      order: 2
     li[class*='confirmed']
       color: white
       background: rgb(215, 8, 51)
@@ -159,11 +198,16 @@ html
   flex-direction: row
   flex-wrap: wrap
 
+.global
+  +grid-column(12)
+  background: rgb(45, 45, 45)
+  border-radius: 6px
+  padding: .5em
 
-.regionlists,.global,.filter-options
-  +desktop
-  width: 100%
-  padding: 1em
++desktop
+  .regionlists,.global,.filter-options
+    //width: 100%
+    padding: 0em
 
 
 +desktop
@@ -171,14 +215,14 @@ html
     padding: 0em
     div
       font-size: 1.8em
-      margin: 0 1.5em 0 1.5em
+      //margin: 0 1.5em 0 1.5em
       span
         font-size: 1em
         font-weight: 400
 
 .filter-options
   +desktop
-  padding: 1em
+  padding: 0em
 
 .regionlists>ul
   +desktop
