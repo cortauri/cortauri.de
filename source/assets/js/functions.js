@@ -18,6 +18,11 @@ window.mapRange = function(n, start1,stop1,start2,stop2) {
 
 $(function() {
 
+  $(window).scroll(function() {
+      var wScroll = $(this).scrollTop();
+      console.log(wScroll);
+  });
+
   function eUS(x){
   return x.toLocaleString('en-US');
   }
@@ -27,7 +32,7 @@ $(function() {
     $(".mod").change('input', function(){
     retval = this.value;
     console.log(retval);
-  }); return retval; } //end MOD
+  }); return retval; } //Time Offset
 
   $.getJSON("https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-population.json" , function(data){
     var poptotal =0;
@@ -38,7 +43,7 @@ $(function() {
     });
 
     $("<div class='pop'>Population Total <span>"+ eUS(poptotal) +"</span></div>").appendTo( ".global" );
-
+    return poptotal;
   });
 
   $.getJSON( "https://pomber.github.io/covid19/timeseries.json", function(data) {
@@ -94,7 +99,7 @@ $(function() {
       $("<li class='active'>active<br><span>"+ activepro +"</span></li>").appendTo( "."+ indexclear +"-list" );
 
       $.each( last_element, function (key, value){
-          console.log(value);
+          //console.log(value);
         $( "<li class='"+ indexclear +"-"+ key +"'>"+ key +"<br><span>"+ eUS(value) +"</span></li>" ).appendTo( "."+ indexclear +"-list" );
 
       });
@@ -109,7 +114,7 @@ $(function() {
 
 
   var poptotalsum = $(".pop>span").html().replace(/,/g,"");
-  console.log(poptotalsum);
+  //console.log(poptotalsum);
   var global_pop_mort = ((global_count_death/poptotalsum)*100).toFixed(5);
 
   var diff_conf = global_count_conf-global_count_conf_yes;
