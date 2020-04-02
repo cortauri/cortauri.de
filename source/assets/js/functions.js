@@ -1,10 +1,33 @@
 import $ from "jquery"
 
+window.constrain = function(n, low, high) {
+    return Math.max(Math.min(n, high), low);
+};
+
+window.mapRange = function(n, start1,stop1,start2,stop2) {
+
+  var newval = (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+
+  if (start2 < stop2) {
+    return this.constrain(newval, start2, stop2);
+  } else {
+    return this.constrain(newval, stop2, start2);
+  }
+
+};
+
 $(function() {
 
   function eUS(x){
   return x.toLocaleString('en-US');
   }
+
+  function setDate() {
+    var retval = 1;
+    $(".mod").change('input', function(){
+    retval = this.value;
+    console.log(retval);
+  }); return retval; } //end MOD
 
   $.getJSON("https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-population.json" , function(data){
     var poptotal =0;
@@ -17,13 +40,6 @@ $(function() {
     $("<div class='pop'>Population Total <span>"+ eUS(poptotal) +"</span></div>").appendTo( ".global" );
 
   });
-
-  function setDate() {
-    var retval = 1;
-    $(".mod").change('input', function(){
-    retval = this.value;
-    console.log(retval);
-  }); return retval; } //end MOD
 
   $.getJSON( "https://pomber.github.io/covid19/timeseries.json", function(data) {
     var global_count_conf = 0;
@@ -59,7 +75,6 @@ $(function() {
         "class": ""+ indexclear +"-list",
         html: ("<li class='"+ indexclear +"-label')>"+ index +"</li>")
       }).appendTo( ".regionlists" );
-
 
       $("<option value='"+ indexclear +"'>").appendTo( "#regionaldata>select" );
 
@@ -101,6 +116,17 @@ $(function() {
   var diff_death = global_count_death-global_count_death_yes;
   var diff_recov = global_count_recov-global_count_recov_yes;
   var diff_activ = global_count_active-global_count_active_yes;
+
+  var gcc_match = window.mapRange(global_count_conf, 0, global_count_conf, 0, 100);
+  var gca_match = Math.round(window.mapRange(global_count_active, 0, global_count_conf, 0, 100));
+  var gcr_match = Math.round(window.mapRange(global_count_recov, 0, global_count_conf, 0, 100));
+  var gcd_match = Math.round(window.mapRange(global_count_death, 0, global_count_conf, 0, 100));
+
+  console.log(gcc_match +"-"+ gca_match +"-"+ gcr_match +"-"+ gcd_match);
+
+  $(".graph>.plot-active").css("width",""+ gca_match +"%");
+  $(".graph>.plot-recovered").css("width",""+ gcr_match  +"%");
+  $(".graph>.plot-death").css("width",""+ gcd_match +"%");
 
 
   $("<div class='date'>latest request confirmed <span>"+ global_date +"</span></div>").appendTo( ".headline" );

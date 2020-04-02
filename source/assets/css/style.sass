@@ -11,8 +11,31 @@ html
   +grid-column(12)
   border-radius: 6px
   background: gray
-  height: 200px
   background: rgb(45, 45, 45)
+  padding: .75em
+  div
+    height: 75px
+    display: block
+    float: left
+    text-align: center
+    padding-top: 2.1em
+    text-transform: uppercase
+    color: rgba(255,255,255,.3)
+    font-size: .75em
+  div:first-child
+    border-top-left-radius: 6px
+    border-bottom-left-radius: 6px
+  div:last-child
+    border-top-right-radius: 6px
+    border-bottom-right-radius: 6px
+  .plot-active
+    background: rgb(65, 48, 254)
+  .plot-recovered
+    background: rgb(50, 144, 31)
+
+  .plot-death
+    background: rgb(22, 22, 22)
+
 
 
 .credits
@@ -41,7 +64,7 @@ html
     display: inline-block
     float: left
     padding: 1em
-    margin-bottom: 1em
+    margin-bottom: 1.25em
     background: rgb(50,50,50)
     color: white
     border-radius: 6px
@@ -61,7 +84,7 @@ html
     border: 0px solid white
     background-repeat: no-repeat
     margin-bottom: -1.5em
-    margin-top: 2em
+    margin-top: 3em
     -webkit-filter: invert(95%)
     filter: invert(100%)
     z-index: 1000
