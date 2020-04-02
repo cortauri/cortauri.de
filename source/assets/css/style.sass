@@ -7,6 +7,20 @@ html
   height: 100%
   color: white
 
+.select
+  //border-radius: 50% !important
+.select[class*='confirmed']
+  background: rgb(215, 8, 51)
+.select[class*='active']
+  background: rgb(41, 123, 246)
+.select[class*='recovered']
+  background: rgb(142, 159, 0)
+.select[class*='deaths']
+  background: rgb(68, 68, 68)
+.select[class*='mortality']
+  background: rgb(246, 246, 246)
+  color: black
+
 .graph
   +grid-column(12)
   border-radius: 6px
@@ -44,12 +58,15 @@ html
   padding: .75em
   display: flex
   flex-direction: row
-  justify-content: space-around
+  justify-content: space-between
   div
     background: rgb(31, 31, 31)
     +size(50px)
     border-radius: 6px
     cursor: pointer
+    padding: .6em
+    text-align: center
+    text-transform: uppercase
 
 
 

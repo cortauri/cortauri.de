@@ -78,7 +78,7 @@ $(function() {
 
       $( "<ul/>", {
         "class": ""+ indexclear +"-list",
-        html: ("<li class='"+ indexclear +"-label')>"+ index +"</li>")
+        html: ("<li class='"+ indexclear +"-label'>"+ index +"</li>")
       }).appendTo( ".regionlists" );
 
       $("<option value='"+ indexclear +"'>").appendTo( "#regionaldata>select" );
@@ -154,6 +154,7 @@ $(function() {
 
   $(".search").on('input', function(){
     var val = this.value;
+    $('.order-options>div').removeClass("select");
     $(".regionlists>ul").removeClass("save_one");
     $(".regionlists>ul").hide();
     $(".regionlists>ul[class*='save_two']").show();
@@ -163,9 +164,9 @@ $(function() {
     }
     //console.log(val);
   });
-
   $(".compare").on('input', function(){
     var val = this.value;
+    $('.order-options>div').removeClass("select");
     $(".regionlists>ul").removeClass("save_two");
     $(".regionlists>ul").hide();
     $(".regionlists>ul[class*='save_one']").show();
@@ -175,6 +176,126 @@ $(function() {
     }
 
     //console.log(val);
+  });
+
+  $(".by-confirmed").click( function(){
+
+    if ($(this).hasClass("select")) {
+      $(this).removeClass("select");
+
+    $('.regionlists>ul').each(function() {
+      $(this).css("order","0");
+    });
+
+    } else {
+
+    $('.order-options>div').removeClass("select");
+    $(this).addClass("select");
+    $('.regionlists>ul').each(function() {
+
+    var sortval = $(this).children('li[class*=-confirmed]').children('span').html().replace(/,/g, "");
+    $(this).css("order","0");
+    $(this).css("order","-"+ sortval +"");
+
+    });
+
+    }
+  });
+  $(".by-recovered").click( function(){
+
+    if ($(this).hasClass("select")) {
+      $(this).removeClass("select");
+
+    $('.regionlists>ul').each(function() {
+      $(this).css("order","0");
+    });
+
+    } else {
+
+    $('.order-options>div').removeClass("select");
+    $(this).addClass("select");
+    $('.regionlists>ul').each(function() {
+
+    var sortval = $(this).children('li[class*=-recovered]').children('span').html().replace(/,/g, "");
+    $(this).css("order","0");
+    $(this).css("order","-"+ sortval +"");
+
+    });
+
+    }
+
+  });
+  $(".by-active").click( function(){
+
+    if ($(this).hasClass("select")) {
+      $(this).removeClass("select");
+
+    $('.regionlists>ul').each(function() {
+      $(this).css("order","0");
+    });
+
+    } else {
+
+    $('.order-options>div').removeClass("select");
+    $(this).addClass("select");
+    $('.regionlists>ul').each(function() {
+
+    var sortval = $(this).children('li[class*=active]').children('span').html().replace(/,/g, "");
+    $(this).css("order","0");
+    $(this).css("order","-"+ sortval +"");
+
+    });
+
+    }
+
+  });
+  $(".by-deaths").click( function(){
+
+    if ($(this).hasClass("select")) {
+      $(this).removeClass("select");
+
+    $('.regionlists>ul').each(function() {
+      $(this).css("order","0");
+    });
+
+    } else {
+
+    $('.order-options>div').removeClass("select");
+    $(this).addClass("select");
+    $('.regionlists>ul').each(function() {
+
+    var sortval = $(this).children('li[class*=-deaths]').children('span').html().replace(/,/g, "");
+    $(this).css("order","0");
+    $(this).css("order","-"+ sortval +"");
+
+    });
+
+    }
+
+  });
+  $(".by-mortality").click( function(){
+
+    if ($(this).hasClass("select")) {
+      $(this).removeClass("select");
+
+    $('.regionlists>ul').each(function() {
+      $(this).css("order","0");
+    });
+
+    } else {
+
+    $('.order-options>div').removeClass("select");
+    $(this).addClass("select");
+    $('.regionlists>ul').each(function() {
+
+    var sortval = $(this).children('li[class*=mortality]').children('span').html().replace("%","").replace(".","");
+    $(this).css("order","0");
+    $(this).css("order","-"+ sortval +"");
+
+    });
+
+    }
+
   });
 
 });
