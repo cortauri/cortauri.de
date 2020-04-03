@@ -20,7 +20,7 @@ $(function() {
 
   $(window).scroll(function() {
       var wScroll = $(this).scrollTop();
-      console.log(wScroll);
+      return wScroll;
   });
 
   function eUS(x){
@@ -35,15 +35,13 @@ $(function() {
   }); return retval; } //Time Offset
 
   $.getJSON("https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-population.json" , function(data){
-    var poptotal =0;
+    var poptotal = 0;
     $.each( data, function( index, value ){
-      var gtotal = Math.round(value.population);
-      poptotal += gtotal;
-
+        var gtotal = Math.round(value.population);
+        poptotal += gtotal;
     });
 
     $("<div class='pop'>Population Total <span>"+ eUS(poptotal) +"</span></div>").appendTo( ".global" );
-    return poptotal;
   });
 
   $.getJSON( "https://pomber.github.io/covid19/timeseries.json", function(data) {
@@ -56,11 +54,16 @@ $(function() {
     var global_count_active = 0;
     var global_count_active_yes = 0;
     var global_date;
-
     var modus = setDate();
+    //var xd_gcc = 0;
 
-    $.each( data, function( index, value ){
+    var poptotalsum = $(".pop>span").html().replace(/,/g,"");
+    //console.log(poptotalsum);
+    var global_pop_mort = ((global_count_death/poptotalsum)*100).toFixed(5);
+
+      $.each( data, function( index, value ){
       var last_element = value[value.length - modus];
+      //var first_element = value[value.length - value.length]
       global_count_conf += last_element.confirmed;
       global_count_recov += last_element.recovered;
       global_count_death += last_element.deaths;
@@ -112,43 +115,38 @@ $(function() {
 
     });
 
+    var diff_conf = global_count_conf-global_count_conf_yes;
+    var diff_death = global_count_death-global_count_death_yes;
+    var diff_recov = global_count_recov-global_count_recov_yes;
+    var diff_activ = global_count_active-global_count_active_yes;
 
-  var poptotalsum = $(".pop>span").html().replace(/,/g,"");
-  //console.log(poptotalsum);
-  var global_pop_mort = ((global_count_death/poptotalsum)*100).toFixed(5);
+    var gcc_match = window.mapRange(global_count_conf, 0, global_count_conf, 0, 100);
+    var gca_match = Math.round(window.mapRange(global_count_active, 0, global_count_conf, 0, 100));
+    var gcr_match = Math.round(window.mapRange(global_count_recov, 0, global_count_conf, 0, 100));
+    var gcd_match = Math.round(window.mapRange(global_count_death, 0, global_count_conf, 0, 100));
 
-  var diff_conf = global_count_conf-global_count_conf_yes;
-  var diff_death = global_count_death-global_count_death_yes;
-  var diff_recov = global_count_recov-global_count_recov_yes;
-  var diff_activ = global_count_active-global_count_active_yes;
+    console.log(gcc_match +"-"+ gca_match +"-"+ gcr_match +"-"+ gcd_match);
 
-  var gcc_match = window.mapRange(global_count_conf, 0, global_count_conf, 0, 100);
-  var gca_match = Math.round(window.mapRange(global_count_active, 0, global_count_conf, 0, 100));
-  var gcr_match = Math.round(window.mapRange(global_count_recov, 0, global_count_conf, 0, 100));
-  var gcd_match = Math.round(window.mapRange(global_count_death, 0, global_count_conf, 0, 100));
-
-  console.log(gcc_match +"-"+ gca_match +"-"+ gcr_match +"-"+ gcd_match);
-
-  $(".graph>.plot-active").css("width",""+ gca_match +"%");
-  $(".graph>.plot-recovered").css("width",""+ gcr_match  +"%");
-  $(".graph>.plot-death").css("width",""+ gcd_match +"%");
+    $(".graph>.plot-active").css("width",""+ gca_match +"%");
+    $(".graph>.plot-recovered").css("width",""+ gcr_match  +"%");
+    $(".graph>.plot-death").css("width",""+ gcd_match +"%");
 
 
-  $("<div class='date'>latest request confirmed <span>"+ global_date +"</span></div>").appendTo( ".headline" );
-  $("<div class='poppro'>Population Affected<span>"+ global_pop_mort +"%</span></div>").appendTo( ".global" );
-  $("<div class='confirmed'>Confirmed | -1d | &delta; <span>"+ eUS(global_count_conf) +" | "+ eUS(global_count_conf_yes) +" | +"+ eUS(diff_conf) +"</span></div>").appendTo( ".global" );
-  $("<div class='active'>Active | -1d | &delta; <span>"+ eUS(global_count_active) +" | "+ eUS(global_count_active_yes) + " | +"+ eUS(diff_activ) +"</span></div>").appendTo( ".global" );
-  $("<div class='recovered'>Recovered | -1d | &delta; <span>"+ eUS(global_count_recov) +" | "+ eUS(global_count_recov_yes) +" | +"+ eUS(diff_recov) +"</span></div>").appendTo( ".global" );
-  $("<div class='deaths'>Deaths | -1d | &delta; <span>"+ eUS(global_count_death) +" | "+ eUS(global_count_death_yes) +" | +"+ eUS(diff_death) +"</span></div>").appendTo( ".global" );
+    $("<div class='date'>latest request confirmed <span>"+ global_date +"</span></div>").appendTo( ".headline" );
+    $("<div class='poppro'>Population Affected<span>"+ global_pop_mort +"%</span></div>").appendTo( ".global" );
+    $("<div class='confirmed'>Confirmed | -1d | &delta; <span>"+ eUS(global_count_conf) +" | "+ eUS(global_count_conf_yes) +" | +"+ eUS(diff_conf) +"</span></div>").appendTo( ".global" );
+    $("<div class='active'>Active | -1d | &delta; <span>"+ eUS(global_count_active) +" | "+ eUS(global_count_active_yes) + " | +"+ eUS(diff_activ) +"</span></div>").appendTo( ".global" );
+    $("<div class='recovered'>Recovered | -1d | &delta; <span>"+ eUS(global_count_recov) +" | "+ eUS(global_count_recov_yes) +" | +"+ eUS(diff_recov) +"</span></div>").appendTo( ".global" );
+    $("<div class='deaths'>Deaths | -1d | &delta; <span>"+ eUS(global_count_death) +" | "+ eUS(global_count_death_yes) +" | +"+ eUS(diff_death) +"</span></div>").appendTo( ".global" );
 
-  var global_count_mort = ((global_count_death/global_count_conf)*100).toFixed(2);
-  var global_count_mort_yes = ((global_count_death_yes/global_count_conf_yes)*100).toFixed(2);
-  var diff_mort = (global_count_mort-global_count_mort_yes).toFixed(2);
-  var pointer = "-";
+    var global_count_mort = ((global_count_death/global_count_conf)*100).toFixed(2);
+    var global_count_mort_yes = ((global_count_death_yes/global_count_conf_yes)*100).toFixed(2);
+    var diff_mort = (global_count_mort-global_count_mort_yes).toFixed(2);
+    var pointer = "-";
 
-  if (global_count_mort >= global_count_mort_yes) { pointer = "+"; }
+    if (global_count_mort >= global_count_mort_yes) { pointer = "+"; }
 
-  $("<div class='mort'>Mortality Rate | -1d | &delta;<span>"+ global_count_mort+"% | "+ global_count_mort_yes +"% | "+ pointer+""+ diff_mort +"%</span></div>").appendTo( ".global" );
+    $("<div class='mort'>Mortality Rate | -1d | &delta;<span>"+ global_count_mort+"% | "+ global_count_mort_yes +"% | "+ pointer+""+ diff_mort +"%</span></div>").appendTo( ".global" );
 
   });
 

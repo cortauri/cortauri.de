@@ -8,7 +8,9 @@ html
   color: white
 
 .select
-  //border-radius: 50% !important
+  font-weight: bold
+//.select[class*='confirmed']::after
+  content: "*"
 .select[class*='confirmed']
   background: rgb(215, 8, 51)
 .select[class*='active']
@@ -69,7 +71,6 @@ html
     text-transform: uppercase
 
 
-
 .credits
   clear: both
   display: block
@@ -100,6 +101,7 @@ html
     background: rgb(50,50,50)
     color: white
     border-radius: 6px
+    text-align: center
 
 .headline>.date
   font-size: 1.2em
@@ -310,6 +312,19 @@ html
   +desktop
   display: block
 
++desktop
+  .order-options>div
+    width: 15%
+  .order-options>div[class*="confirmed"]::after
+    content: "onfirmed"
+  .order-options>div[class*="active"]::after
+    content: "ctive"
+  .order-options>div[class*="recovered"]::after
+    content: "ecovered"
+  .order-options>div[class*="death"]::after
+    content: "eaths"
+  .order-options>div[class*="mort"]::after
+    content: "ortality"
 
 //.search,.mod,.compare,.comparesnd
   +desktop
