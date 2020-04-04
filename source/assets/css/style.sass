@@ -1,34 +1,60 @@
 @import plugins/setup
 
 html
-  font: 1em/1.84em 'Sen', sans-serif
-  background: rgb(33, 33, 33)
+  font: 1em/1.84em $fontfa, sans-serif
+  background: $htmlbg
   min-height: 100%
   height: 100%
-  color: white
+  color: $htmlc
 
-.select
-  font-weight: bold
-//.select[class*='confirmed']::after
-  content: "*"
-.select[class*='confirmed']
-  background: rgb(215, 8, 51)
-.select[class*='active']
-  background: rgb(41, 123, 246)
-.select[class*='recovered']
-  background: rgb(142, 159, 0)
-.select[class*='deaths']
-  background: rgb(68, 68, 68)
-.select[class*='mortality']
-  background: rgb(246, 246, 246)
-  color: black
+.showcase
+  +grid-column(12)
+  display: flex
+  margin-top: 1em
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: space-between
+  >div
+    flex-basis: 100%
+    column-gap: 1em
+    align-items: flex-start
+    padding: 1em
+    margin: 0
 
+.graph-timeseries
+  //+grid-column(12)
+  border-radius: 6px
+  background: rgb(45,45,45)
+  background: linear-gradient(0deg, rgba(45,45,45,1) 17%, rgba(55,55,55,1) 100%)
+  padding: .75em
+  margin-top: 1em
+  .plot-confirmed
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: space-around
+    align-items: flex-end
+    >div
+      flex-basis: 100%
+      background: none
+      border-radius: 6px
+      >div
+        border-radius: 6px
+        margin-bottom: .15em
+        margin-left: .15em
+      >.xd_gcc
+        background: $bgc_confirmed
+      >.xd_gcr
+        background: $bgc_recovered
+      >.xd_gcd
+        background: $bgc_death
 .graph
   +grid-column(12)
   border-radius: 6px
   background: gray
   background: rgb(45, 45, 45)
   padding: .75em
+  margin-top: 1em
   div
     height: 75px
     display: block
@@ -45,47 +71,30 @@ html
     border-top-right-radius: 6px
     border-bottom-right-radius: 6px
   .plot-active
-    background: rgb(65, 48, 254)
+    background: $bgc_active
   .plot-recovered
-    background: rgb(50, 144, 31)
-
+    background: $bgc_recovered
   .plot-death
-    background: rgb(22, 22, 22)
+    background: $bgc_death
 
 .order-options
   +grid-column(12)
   border-radius: 6px
-  background: rgb(45, 45, 45)
+  background: rgb(45,45,45)
+  //background: linear-gradient(0deg, rgba(45,45,45,1) 17%, rgba(55,55,55,1) 100%)
   margin-bottom: 1em
   padding: .75em
   display: flex
   flex-direction: row
   justify-content: space-between
   div
-    background: rgb(31, 31, 31)
+    background: rgb(28, 28, 28)
     +size(50px)
     border-radius: 6px
     cursor: pointer
     padding: .6em
     text-align: center
     text-transform: uppercase
-
-
-.credits
-  clear: both
-  display: block
-  overflow: hidden
-  width: 100%
-  height: 500px
-  background: rgb(68,68,68)
-  background: linear-gradient(0deg, rgba(68,68,68,1) 35%, rgba(47,47,47,1) 100%)
-  article
-    +grid-column(12)
-    text-align: center
-    margin: 1em
-    h1,p,a
-      font-size: .5em
-      color: white
 
 .filter
   width: 100%
@@ -98,6 +107,7 @@ html
     float: left
     padding: 1em
     margin-bottom: 1.25em
+    margin-top: 1.25em
     background: rgb(50,50,50)
     color: white
     border-radius: 6px
@@ -158,19 +168,16 @@ html
     margin-right: .7em
     font-size: 1.5em
     width: auto
-
 .global>.confirmed
-  color: rgb(223, 39, 39)
-  //background: beige
+  color: $bgc_confirmed
 .global>.recovered
-  color: rgb(88, 176, 97)
+  color: $bgc_recovered
 .global>.deaths
-  //color: white
-  //background: rgb(68, 68, 68)
+  color: $bgc_death
 .global>.mort
   color: rgb(157, 157, 157)
 .global>.active
-  color: rgb(41, 123, 246)
+  color: $bgc_active
 
 .global>div:last-child
   border: 0
@@ -222,7 +229,7 @@ html
         padding: 0 .8em 0 0
         font-size: 1.25em
     li[class*='label']
-      background: rgb(31, 50, 77)
+      background: $bgc_label
       font-weight: bold
       font-size: 2em
       text-align: center
@@ -238,12 +245,12 @@ html
     li[class*='mortality']
       color: rgb(66, 4, 84)
     li[class*='active']
-      background: rgb(41, 123, 246)
+      background: $bgc_active
       color: white
       order: 3
     li[class*='recovered']
       color: rgb(255, 255, 255)
-      background: rgb(142, 159, 0)
+      background: $bgc_recovered
     li[class*='date']
       display: none
     li[class*='mortality']
@@ -252,30 +259,60 @@ html
       order: 2
     li[class*='confirmed']
       color: white
-      background: rgb(215, 8, 51)
+      background: $bgc_confirmed
     li[class*='death']
-      background: rgb(68, 68, 68)
+      background: $bgc_death
       color: white
     //li:hover
       background: rgb(235, 233, 233)
       color: black
+
+.select
+  font-weight: bold
+.select[class*='confirmed']
+  background: $bgc_confirmed
+.select[class*='active']
+  background: $bgc_active
+.select[class*='recovered']
+  background: $bgc_recovered
+.select[class*='deaths']
+  background: $bgc_death
+.select[class*='mortality']
+  background: rgb(246, 246, 246)
+  color: black
+
+.global
+  //+grid-column(12)
+  background: rgb(45,45,45)
+  //background: linear-gradient(0deg, rgba(45,45,45,1) 17%, rgba(55,55,55,1) 100%)
+  border-radius: 6px
+  padding: .5em
 
 .regionlists
   display: flex
   flex-direction: row
   flex-wrap: wrap
 
-.global
-  +grid-column(12)
-  background: rgb(45, 45, 45)
-  border-radius: 6px
-  padding: .5em
+.credits
+  clear: both
+  display: block
+  overflow: hidden
+  width: 100%
+  height: 500px
+  background: rgb(68,68,68)
+  background: linear-gradient(0deg, rgba(68,68,68,1) 35%, rgba(47,47,47,1) 100%)
+  article
+    +grid-column(12)
+    text-align: center
+    margin: 1em
+    h1,p,a
+      font-size: .5em
+      color: white
 
 +desktop
   .regionlists,.global,.filter-options
     //width: 100%
     padding: 0em
-
 
 +desktop
   .global
@@ -288,12 +325,11 @@ html
       border-bottom-right-radius: 6px
     div
       overflow: hidden
-      font-size: 1.7em
+      font-size: 1.6em
       font-weight: bold
-      //margin: 0 1.5em 0 1.5em
       span
         font-size: 1em
-        font-weight: 400
+
     div:hover
       background: rgb(54, 54, 54)
 
@@ -306,7 +342,6 @@ html
     +grid-column(6)
   margin: 0
   margin-bottom: 2em
-
 
 .filter-options,.filter
   +desktop
@@ -326,12 +361,17 @@ html
   .order-options>div[class*="mort"]::after
     content: "ortality"
 
-//.search,.mod,.compare,.comparesnd
-  +desktop
-  border: 1px solid gray
-  font-size: .8em
-  padding: 1em
-  margin: 1em 2em 0 0em
-  display: inline
-  float: left
-  clear: none
++desktop
+  .showcase
+    +grid-column(6)
+    display: flex
+    margin-top: 1em
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    >div
+      flex-basis: 100%
+      column-gap: 1em
+      align-items: flex-start
+      padding: 1em
+      margin: 0
