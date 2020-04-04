@@ -59,7 +59,6 @@ $(function() {
 
     var poptotalsum = $(".pop>span").html().replace(/,/g,"");
     //console.log(poptotalsum);
-    var global_pop_mort = ((global_count_death/poptotalsum)*100).toFixed(5);
 
       $.each( data, function( index, value ){
       var last_element = value[value.length - modus];
@@ -131,6 +130,7 @@ $(function() {
     $(".graph>.plot-recovered").css("width",""+ gcr_match  +"%");
     $(".graph>.plot-death").css("width",""+ gcd_match +"%");
 
+    var global_pop_mort = ((global_count_death/poptotalsum)*100).toFixed(5);
 
     $("<div class='date'>latest request confirmed <span>"+ global_date +"</span></div>").appendTo( ".headline" );
     $("<div class='poppro'>Population Affected<span>"+ global_pop_mort +"%</span></div>").appendTo( ".global" );
