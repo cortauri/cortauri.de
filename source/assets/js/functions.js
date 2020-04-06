@@ -140,6 +140,8 @@ $(function() {
       }
 
     $("<div class='daycount'>Day "+ i +"</div>").appendTo(".graph-timeseries>.plot-confirmed");
+    //$("<div class='daycount-min'><</div>").appendTo(".graph-timeseries>.plot-confirmed");
+    //$("<div class='daycount-pls'>></div>").appendTo(".graph-timeseries>.plot-confirmed");
 
 
     var diff_conf = global_count_conf-global_count_conf_yes;
