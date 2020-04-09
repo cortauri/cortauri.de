@@ -131,9 +131,9 @@ $(function() {
         });
 
         console.log(xd_gcc +"-"+ xd_gcd +"-"+ xd_gcr);
-        xd_gcc = Math.round(window.mapRange(xd_gcc, 0, global_count_conf, 1, 100));
-        xd_gcd = Math.round(window.mapRange(xd_gcd, 0, global_count_conf, 1, 100));
-        xd_gcr = Math.round(window.mapRange(xd_gcr, 0, global_count_conf, 1, 100));
+        xd_gcc = window.mapRange(xd_gcc, 0, global_count_conf, 1, 100);
+        xd_gcd = window.mapRange(xd_gcd, 0, global_count_conf, 1, 100);
+        xd_gcr = window.mapRange(xd_gcr, 0, global_count_conf, 1, 100);
         console.log(xd_gcc +" cases globaly at "+ xd_date);
         $("<div><div class='xd_gcc inner'></div><div class='xd_gcr inner'></div><div class='xd_gcd inner'></div></div>").appendTo(".graph-timeseries>.plot-confirmed").children(".xd_gcc").css("height",""+xd_gcc*2+"px").parent().children(".xd_gcr").css("height",""+xd_gcr*2+"px").parent().children(".xd_gcd").css("height",""+xd_gcd*2+"px");
 
@@ -150,9 +150,9 @@ $(function() {
     var diff_activ = global_count_active-global_count_active_yes;
 
     var gcc_match = window.mapRange(global_count_conf, 0, global_count_conf, 0, 100);
-    var gca_match = Math.round(window.mapRange(global_count_active, 0, global_count_conf, 0, 100));
-    var gcr_match = Math.round(window.mapRange(global_count_recov, 0, global_count_conf, 0, 100));
-    var gcd_match = Math.round(window.mapRange(global_count_death, 0, global_count_conf, 0, 100));
+    var gca_match = window.mapRange(global_count_active, 0, global_count_conf, 0, 100);
+    var gcr_match = window.mapRange(global_count_recov, 0, global_count_conf, 0, 100);
+    var gcd_match = window.mapRange(global_count_death, 0, global_count_conf, 0, 100);
 
     console.log(gcc_match +"-"+ gca_match +"-"+ gcr_match +"-"+ gcd_match);
 
