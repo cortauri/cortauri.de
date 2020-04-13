@@ -143,7 +143,6 @@ $(function() {
     //$("<div class='daycount-min'><</div>").appendTo(".graph-timeseries>.plot-confirmed");
     //$("<div class='daycount-pls'>></div>").appendTo(".graph-timeseries>.plot-confirmed");
 
-
     var diff_conf = global_count_conf-global_count_conf_yes;
     var diff_death = global_count_death-global_count_death_yes;
     var diff_recov = global_count_recov-global_count_recov_yes;
@@ -176,7 +175,7 @@ $(function() {
 
     if (global_count_mort >= global_count_mort_yes) { pointer = "+"; }
 
-    $("<div class='mort'>Mortality Rate | -1d &delta;<span>"+ global_count_mort+"% | "+ pointer+""+ diff_mort +"%</span></div>").appendTo( ".global" );
+    $("<div class='mort'>Mortality Rate |  &delta; -1d <span>"+ global_count_mort+"% | "+ pointer+""+ diff_mort +"%</span></div>").appendTo( ".global" );
 
   });
 
