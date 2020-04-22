@@ -171,7 +171,7 @@ $(function() {
     var global_count_mort = ((global_count_death/global_count_conf)*100).toFixed(2);
     var global_count_mort_yes = ((global_count_death_yes/global_count_conf_yes)*100).toFixed(2);
     var diff_mort = (global_count_mort-global_count_mort_yes).toFixed(2);
-    var pointer = "-";
+    var pointer = "";
 
     if (global_count_mort >= global_count_mort_yes) { pointer = "+"; }
 
