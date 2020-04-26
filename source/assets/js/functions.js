@@ -82,7 +82,7 @@ $(function() {
 
       $( "<ul/>", {
         "class": ""+ indexclear +"-list",
-        html: ("<li class='"+ indexclear +"-label'>"+ index +"</li>")
+        html: ("<li class='"+ indexclear +"-label'><span>"+ index +"</span><span>"+ eUS(last_element.confirmed) +"</span></li>")
       }).appendTo( ".regionlists" );
 
       $("<option value='"+ indexclear +"'>").appendTo( "#regionaldata>select" );
@@ -90,6 +90,7 @@ $(function() {
       var conf = JSON.stringify(last_element.confirmed, null, 2);
       var recov = JSON.stringify(last_element.recovered, null, 2);
       var death = JSON.stringify(last_element.deaths, null, 2);
+
       var iconf = parseInt(conf);
       var irecov = parseInt(recov);
       var ideath = parseInt(death);
@@ -99,20 +100,45 @@ $(function() {
       var active = iconf-ideath-irecov;
       var activepro = eUS(active);
 
-      $("<li class='mortality'>mortality<br><span>"+ totalpro +"%</span></li>").appendTo( "."+ indexclear +"-list" );
-      $("<li class='active'>active<br><span>"+ activepro +"</span></li>").appendTo( "."+ indexclear +"-list" );
+      //yesterday starts /*
+      var conf_yes = JSON.stringify(last_element_yes.confirmed, null, 2);
+      var recov_yes = JSON.stringify(last_element_yes.recovered, null, 2);
+      var death_yes = JSON.stringify(last_element_yes.deaths, null, 2);
+
+      var iconf_yes = parseInt(conf_yes);
+      var irecov_yes = parseInt(recov_yes);
+      var ideath_yes = parseInt(death_yes);
+      var itotal_yes = iconf_yes;
+
+      var ipr_yes = ((ideath_yes/itotal_yes)*100).toFixed(2);
+      var totalpro_yes = ipr_yes.toString();
+      var active_yes = iconf_yes-ideath_yes-irecov_yes;
+      var activepro_yes = eUS(active_yes);
+
+      var iconf_diff = conf-conf_yes;
+      var irecov_diff = recov-recov_yes;
+      var ideath_diff = death-death_yes;
+      var iactive_diff = active-active_yes;
+      var itotal_diff = (totalpro-totalpro_yes).toFixed(2); //diff
+
+      console.log(iconf_diff+" - "+ irecov_diff +" - "+ ideath_diff +" - Active: "+ iactive_diff +" - Mortality: "+ itotal_diff);
+
+      $("<li class='mortality'>mortality<br><span class='today'><span>"+ totalpro +"%</span></span><span class='yesterday'>"+ totalpro_yes +"%</span><span class='diff-total'>"+ itotal_diff +"%</span></li>").appendTo( "."+ indexclear +"-list" );
+      $("<li class='active'>active<br><span class='today'><span>"+ activepro +"</span></span><span class='yesterday'>"+ activepro_yes +"</span><span class='diff-active'>"+ eUS(iactive_diff) +"</span></li>").appendTo( "."+ indexclear +"-list" );
 
       $.each( last_element, function (key, value){
-          //console.log(value);
-        $( "<li class='"+ indexclear +"-"+ key +"'>"+ key +"<br><span>"+ eUS(value) +"</span></li>" ).appendTo( "."+ indexclear +"-list" );
+          console.log(value);
+        $( "<li class='"+ indexclear +"-"+ key +"'>"+ key +"<br><span class='today'><span>"+ eUS(value) +"</span></span></li>" ).appendTo( "."+ indexclear +"-list" );
 
       });
 
-      /*$.each( last_element_yes, function (key, value){
+      $.each( last_element_yes, function (key, value){
+        $("ul[class='"+ indexclear +"-list']>li[class='"+ indexclear +"-"+ key +"']").append("<span class='yesterday'>"+ eUS(value) +"</span>");
+      });
 
-        $( "<li class='"+ indexclear +"-"+ key +"'>"+ key +" <span>"+ value +"</span></li>" ).appendTo( "."+ indexclear +"-list" );
-
-      });*/
+      $("ul[class='"+ indexclear +"-list']>li[class='"+ indexclear +"-confirmed']").append("<span class='diff-conf'>"+ eUS(iconf_diff) +"</span>");
+      $("ul[class='"+ indexclear +"-list']>li[class='"+ indexclear +"-recovered']").append("<span class='diff-recov'>"+ eUS(irecov_diff) +"</span>");
+      $("ul[class='"+ indexclear +"-list']>li[class='"+ indexclear +"-deaths']").append("<span class='diff-death'>"+ eUS(ideath_diff) +"</span>");
 
     });
 
@@ -177,6 +203,18 @@ $(function() {
 
     $("<div class='mort'>Mortality Rate |  &delta; -1d <span>"+ global_count_mort+"% | "+ pointer+""+ diff_mort +"%</span></div>").appendTo( ".global" );
 
+    $("span[class*=diff]").prepend(function(){
+      var fv = $(this).html().replace("%","").replace(/,/g, "");
+      if (fv > 0){
+        this.prepend("+");
+      }
+
+    });
+
+    $("span[class*=today]").append("<span>Act</span>");
+    $("span[class*=diff]").append("<span>&delta;</span>");
+    $("span[class*=yesterday]").append("<span>-1Day</span>");
+
   });
 
   $(".search").on('input', function(){
@@ -220,7 +258,7 @@ $(function() {
     $(this).addClass("select");
     $('.regionlists>ul').each(function() {
 
-    var sortval = $(this).children('li[class*=-confirmed]').children('span').html().replace(/,/g, "");
+    var sortval = $(this).children('li[class*=-confirmed]').children('span').children('span').html().replace(/,/g, "");
     $(this).css("order","0");
     $(this).css("order","-"+ sortval +"");
 
@@ -243,7 +281,7 @@ $(function() {
     $(this).addClass("select");
     $('.regionlists>ul').each(function() {
 
-    var sortval = $(this).children('li[class*=-recovered]').children('span').html().replace(/,/g, "");
+    var sortval = $(this).children('li[class*=-recovered]').children('span').children('span').html().replace(/,/g, "");
     $(this).css("order","0");
     $(this).css("order","-"+ sortval +"");
 
@@ -267,7 +305,7 @@ $(function() {
     $(this).addClass("select");
     $('.regionlists>ul').each(function() {
 
-    var sortval = $(this).children('li[class*=active]').children('span').html().replace(/,/g, "");
+    var sortval = $(this).children('li[class*=active]').children('span').children('span').html().replace(/,/g, "");
     $(this).css("order","0");
     $(this).css("order","-"+ sortval +"");
 
@@ -291,7 +329,7 @@ $(function() {
     $(this).addClass("select");
     $('.regionlists>ul').each(function() {
 
-    var sortval = $(this).children('li[class*=-deaths]').children('span').html().replace(/,/g, "");
+    var sortval = $(this).children('li[class*=-deaths]').children('span').children('span').html().replace(/,/g, "");
     $(this).css("order","0");
     $(this).css("order","-"+ sortval +"");
 
@@ -315,7 +353,7 @@ $(function() {
     $(this).addClass("select");
     $('.regionlists>ul').each(function() {
 
-    var sortval = $(this).children('li[class*=mortality]').children('span').html().replace("%","").replace(".","");
+    var sortval = $(this).children('li[class*=mortality]').children('span').children('span').html().replace("%","").replace(".","");
     $(this).css("order","0");
     $(this).css("order","-"+ sortval +"");
 
@@ -324,5 +362,6 @@ $(function() {
     }
 
   });
+
 
 });

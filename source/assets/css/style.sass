@@ -254,11 +254,27 @@ html
       font-size: .8em
       text-align: center
       flex-basis: 25%
+      display: flex
+      //align-items: flex-end
+      flex-direction: column
       span
+        order: 0
         font-weight: bold
         float: right
-        padding: 0 .8em 0 0
-        font-size: 1.25em
+        padding: 0 0 0 0
+        //font-size: 1.25em
+        display: flex
+        flex-direction: row
+        flex-wrap: nowrap
+        justify-content: space-around
+        text-align: center
+        >span
+          font-size: 1.05em
+          text-align: center
+      >span:nth-child(2)
+        border-bottom: 1px solid white
+      >span:nth-child(3)
+        border-bottom: 1px solid white
     li[class*='label']
       background: $bgc_label
       font-weight: bold
@@ -269,7 +285,14 @@ html
       flex: 0 0 100%
       flex-basis: 75%
       order: 0
-
+      >span:nth-child(2)
+        border-top: 1px solid white
+        border-bottom: none
+    li[class*='mortality']
+      >span:nth-child(2)
+        border-bottom: 1px solid black
+      >span:nth-child(3)
+        border-bottom: 1px solid black
 
       //background: linear-gradient(0deg, rgba(157,157,157,1) 5%, rgba(255,255,255,0.569625350140056) 95%)
       //border-bottom: 3px solid white
