@@ -204,6 +204,16 @@
 		"oF": 0,
 		"oS": 1
 		},
+	"/source/sections/disclaimer.pug": {
+		"cB": 0,
+		"cOD": 1,
+		"ft": 512,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/build/sections/disclaimer.html",
+		"oF": 0,
+		"oS": 1
+		},
 	"/source/sections/footer.pug": {
 		"cB": 0,
 		"cOD": 1,

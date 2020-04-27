@@ -181,13 +181,13 @@ $(function() {
 
     console.log(gcc_match +"-"+ gca_match +"-"+ gcr_match +"-"+ gcd_match);
 
-    $(".graph>.plot-active").css("width",""+ gca_match +"%");
-    $(".graph>.plot-recovered").css("width",""+ gcr_match  +"%");
-    $(".graph>.plot-death").css("width",""+ gcd_match +"%");
+    $(".graph>.plot-active").css("width",""+ gca_match +"%").append("a");
+    $(".graph>.plot-recovered").css("width",""+ gcr_match  +"%").append("r");
+    $(".graph>.plot-death").css("width",""+ gcd_match +"%").append("d");
 
     var global_pop_mort = ((global_count_death/poptotalsum)*100).toFixed(5);
 
-    $("<div class='date'>latest request confirmed <span>"+ global_date +"</span></div>").appendTo( ".headline" );
+    $("<div class='date'>latest request - <span>"+ global_date +"</span></div>").appendTo(".headline");
     $("<div class='poppro'>Population Affected<span>"+ global_pop_mort +"%</span></div>").appendTo( ".global" );
     $("<div class='confirmed'>Confirmed | &delta; -1d <span>"+ eUS(global_count_conf) +" | +"+ eUS(diff_conf) +"</span></div>").appendTo( ".global" );
     $("<div class='active'>Active | &delta; -1d <span>"+ eUS(global_count_active) +" | +"+ eUS(diff_activ) +"</span></div>").appendTo( ".global" );
@@ -265,7 +265,7 @@ $(function() {
     });
 
     }
-  });
+  }).append("c");
   $(".by-recovered").click( function(){
 
     if ($(this).hasClass("select")) {
@@ -289,7 +289,7 @@ $(function() {
 
     }
 
-  });
+  }).append("r");
   $(".by-active").click( function(){
 
     if ($(this).hasClass("select")) {
@@ -313,7 +313,7 @@ $(function() {
 
     }
 
-  });
+  }).append("a");
   $(".by-deaths").click( function(){
 
     if ($(this).hasClass("select")) {
@@ -337,7 +337,7 @@ $(function() {
 
     }
 
-  });
+  }).append("d");
   $(".by-mortality").click( function(){
 
     if ($(this).hasClass("select")) {
@@ -361,7 +361,7 @@ $(function() {
 
     }
 
-  });
+  }).append("m");
 
 
 });
