@@ -82,7 +82,7 @@ $(function() {
 
       $( "<ul/>", {
         "class": ""+ indexclear +"-list",
-        html: ("<li class='"+ indexclear +"-label'><span>"+ index +"</span><span>"+ eUS(last_element.confirmed) +"</span></li>")
+        html: ("<li class='"+ indexclear +"-label'><span>"+ index +"</span></li>")
       }).appendTo( ".regionlists" );
 
       $("<option value='"+ indexclear +"'>").appendTo( "#regionaldata>select" );
@@ -214,6 +214,16 @@ $(function() {
     $("span[class*=today]").append("<span>Act</span>");
     $("span[class*=diff]").append("<span>&delta;</span>");
     $("span[class*=yesterday]").append("<span>-1Day</span>");
+
+
+    $.getJSON("https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-population-density.json", function(data){
+      $.each(data, function( index, value ){
+        console.log(index +"-"+ value.country +"-"+ value.density);
+        if (value.density != null) {
+        $("li[class*='"+ value.country +"-label']").append("<span class='density'>Population density "+value.density+ " people/sqm</span>"); //append
+        }
+      });
+    });
 
   });
 
