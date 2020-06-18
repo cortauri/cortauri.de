@@ -220,7 +220,7 @@ $(function() {
       $.each(data, function( index, value ){
         console.log(index +"-"+ value.country +"-"+ value.density);
         if (value.density != null) {
-        $("li[class*='"+ value.country +"-label']").append("<span class='density'>Population density "+value.density+ " people/sqm</span>"); //append
+        $("li[class*='"+ value.country +"-label']").append("<span class='density'>Population density "+value.density.toFixed(2)+ " people per square kilometer</span>"); //append
         }
       });
     });
