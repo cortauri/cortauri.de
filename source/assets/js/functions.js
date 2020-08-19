@@ -187,10 +187,13 @@ $(function() {
 
     var global_pop_mort = ((global_count_death/poptotalsum)*100).toFixed(5);
 
+    var pointer_a = "";
+    if (global_count_active >= global_count_active_yes) { pointer_a = "+"; }
+
     $("<div class='date'>latest request - <span>"+ global_date +"</span></div>").appendTo(".headline");
     $("<div class='poppro'>Population Affected<span>"+ global_pop_mort +"%</span></div>").appendTo( ".global" );
     $("<div class='confirmed'>Confirmed | &delta; -1d <span>"+ eUS(global_count_conf) +" | +"+ eUS(diff_conf) +"</span></div>").appendTo( ".global" );
-    $("<div class='active'>Active | &delta; -1d <span>"+ eUS(global_count_active) +" | +"+ eUS(diff_activ) +"</span></div>").appendTo( ".global" );
+    $("<div class='active'>Active | &delta; -1d <span>"+ eUS(global_count_active) +" | "+ pointer_a+""+ eUS(diff_activ) +"</span></div>").appendTo( ".global" );
     $("<div class='recovered'>Recovered | &delta; -1d <span>"+ eUS(global_count_recov) +" | +"+ eUS(diff_recov) +"</span></div>").appendTo( ".global" );
     $("<div class='deaths'>Deaths | &delta; -1d <span>"+ eUS(global_count_death) +" | +"+ eUS(diff_death) +"</span></div>").appendTo( ".global" );
 
@@ -199,7 +202,9 @@ $(function() {
     var diff_mort = (global_count_mort-global_count_mort_yes).toFixed(2);
     var pointer = "";
 
+
     if (global_count_mort >= global_count_mort_yes) { pointer = "+"; }
+
 
     $("<div class='mort'>Mortality Rate |  &delta; -1d <span>"+ global_count_mort+"% | "+ pointer+""+ diff_mort +"%</span></div>").appendTo( ".global" );
 
