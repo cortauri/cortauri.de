@@ -14,7 +14,6 @@ import $ from "jquery"
     g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();
 
-
 window.constrain = function(n, low, high) {
     return Math.max(Math.min(n, high), low);
 };
