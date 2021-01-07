@@ -208,8 +208,8 @@ $(function() {
     $("<div class='active'>Active | &delta; -1d <span>"+ eUS(global_count_active) +" | "+ pointer_a+""+ eUS(diff_activ) +"</span></div>").appendTo( ".global" );
     $("<div class='recovered'>Recovered | &delta; -1d <span>"+ eUS(global_count_recov) +" | +"+ eUS(diff_recov) +"</span></div>").appendTo( ".global" );
     $("<div class='deaths'>Deaths | &delta; -1d <span>"+ eUS(global_count_death) +" | +"+ eUS(diff_death) +"</span></div>").appendTo( ".global" );
-    $("<div class='co'>CO2 / min<span>"+ eUS(global_count_death*4.8/365/24/60) +" t | +"+ eUS(diff_death*4.8/365/24/60) +" t</span></div>").appendTo( ".global" );
-    $("<div class='cot'>Trees / min<span>"+ eUS(global_count_death*4.8*80/365/24/60) +" | +"+ eUS(diff_death*4.8*80/365/24/60) +"</span></div>").appendTo( ".global" );
+    $("<div class='co'>CO2 / p.a.<span>"+ eUS(global_count_death*4.8) +" t | +"+ eUS(diff_death*4.8) +" t</span></div>").appendTo( ".global" );
+    $("<div class='cot'>Trees / p.a.<span>"+ eUS(global_count_death*4.8*80) +" | +"+ eUS(diff_death*4.8*80) +"</span></div>").appendTo( ".global" );
 
 
     var global_count_mort = ((global_count_death/global_count_conf)*100).toFixed(2);
