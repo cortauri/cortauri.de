@@ -198,7 +198,7 @@ $(function() {
     $(".graph>.plot-recovered").css("width",""+ gcr_match  +"%").append("r");
     $(".graph>.plot-death").css("width",""+ gcd_match +"%").append("d");
 
-    var global_pop_mort = ((global_count_conf/poptotalsum)*100).toFixed(5);
+    var global_pop_mort = ((global_count_conf/poptotalsum)*100).toFixed(2);
 
     var pointer_a = "";
     if (global_count_active >= global_count_active_yes) { pointer_a = "+"; }
