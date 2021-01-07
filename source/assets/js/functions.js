@@ -204,6 +204,12 @@ $(function() {
     var co2_diff = diff_death*4.8.toFixed(0);
     var trees = co2*80.0.toFixed(0);
     var trees_diff = co2_diff*80.0.toFixed(0);
+
+
+// Test Area
+
+
+
     if (global_count_active >= global_count_active_yes) { pointer_a = "+"; }
 
     $("<div class='date'>latest request - <span>"+ global_date +"</span></div>").appendTo(".headline");
