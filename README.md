@@ -1,3 +1,3 @@
-# covid19 cases
+# covid19 in numbers
 
-gives an overview of covid19 cases confirmed cases and deaths
+explore confirmed cases worldwide, based on https://pomber.github.io/covid19/timeseries.json
