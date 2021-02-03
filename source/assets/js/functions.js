@@ -178,7 +178,8 @@ $(function() {
 
       }
 
-    $("<div class='daycount'>Day "+ i +"</div>").appendTo(".graph-timeseries>.plot-confirmed");
+    $("h2[class*=daycount]").append("<span>day "+ i +" of pandemic</span>");
+    //$("<div class='daycount'>day "+ i +" of pandemic</div>").appendTo(".graph-timeseries>.plot-confirmed");
     //$("<div class='daycount-min'><</div>").appendTo(".graph-timeseries>.plot-confirmed");
     //$("<div class='daycount-pls'>></div>").appendTo(".graph-timeseries>.plot-confirmed");
 
@@ -218,8 +219,8 @@ $(function() {
     $("<div class='active'>Active | &delta; -1d <span>"+ eUS(global_count_active) +" | "+ pointer_a+""+ eUS(diff_activ) +"</span></div>").appendTo( ".global" );
     $("<div class='recovered'>Recovered | &delta; -1d <span>"+ eUS(global_count_recov) +" | +"+ eUS(diff_recov) +"</span></div>").appendTo( ".global" );
     $("<div class='deaths'>Deaths | &delta; -1d <span>"+ eUS(global_count_death) +" | +"+ eUS(diff_death) +"</span></div>").appendTo( ".global" );
-    $("<div class='co'>CO2 / p.a.<span>"+ eUS(co2) +" t | +"+ eUS(co2_diff) +" t</span></div>").appendTo( ".global" );
-    $("<div class='cot'>Trees / p.a.<span>"+ eUS(trees) +" | +"+ eUS(trees_diff) +"</span></div>").appendTo( ".global" );
+    $("<div class='co'>CO2 saved / p.a.<span>"+ eUS(co2) +" t | +"+ eUS(co2_diff) +" t</span></div>").appendTo( ".global" );
+    $("<div class='cot'>Trees saved / p.a.<span>"+ eUS(trees) +" | +"+ eUS(trees_diff) +"</span></div>").appendTo( ".global" );
 
 
     var global_count_mort = ((global_count_death/global_count_conf)*100).toFixed(2);
@@ -402,6 +403,5 @@ $(function() {
     }
 
   }).append("m");
-
 
 });
