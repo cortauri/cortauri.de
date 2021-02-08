@@ -17,6 +17,14 @@
 		"oAP": "/build/.gitignore",
 		"oF": 0
 		},
+	"/.nova/Publishing/udag.de-host.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/build/.nova/Publishing/udag.de-host-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/build": {
 		"ft": 65536,
 		"oA": 1,
